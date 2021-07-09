@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementForDefault="qualified">
+
+    <xsd:element name="departments">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="university" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="university">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="item" maxOccurs="unbounded"/>
+            </xsd:sequence>
+                <xsd:attribute name="name" type="xsd:string" use="required"/>
+                <xsd:attribute name="uType" type="uType" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <xsd:element name="item">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="name"/>
+                <xsd:element ref="period"/>
+                <xsd:element ref="quota"/>
+                <xsd:element ref="field"/>
+                <xsd:element ref="last_min_score"/>
+                <xsd:element ref="grant"/>
+            </xsd:sequence>
+                <xsd:attribute name="faculty" type="xsd:string" use="required"/>
+                <xsd:attribute name="id" type="ID" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <xsd:element name="period" type="xsd:integer"/>
+
+    <xsd:element name="field">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="SAY"/>
+                <xsd:enumeration value="EA"/>
+                <xsd:enumeration value="SÖZ"/>
+                <xsd:enumeration value="DİL"/>
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+    
+    <xsd:element name="grant">
+        <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="25"/>
+                <xsd:enumeration value="50"/>
+                <xsd:enumeration value="100"/>
+                <xsd:enumeration value=""/>
+                
+            </xsd:restriction>
+        </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="name">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="lang" type="LANG"/>
+                    <xsd:attribute name="second" type="SECOND"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+     <xsd:element name="quota">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:integer">
+                    <xsd:attribute name="spec" type="NUMBER"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="last_min_score">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="SCORE">
+                    <xsd:attribute name="order" type="xsd:integer"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="uType">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="Devlet|Vakıf"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ID">
+        <xsd:restriction base="xsd:integer">
+            <xsd:pattern value="[0-9]{9}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="LANG">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="en|tr"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="SECOND">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="No|İkinci Öğretim"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="SCORE">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="(([0-9]{3}[,][0-9]{5})|([0-9]{3}[,][0-9]{4}))*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="NUMBER">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([0-9]|[0-9]{2}|[0-9]{3})*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+
+            
+</xsd:schema>
